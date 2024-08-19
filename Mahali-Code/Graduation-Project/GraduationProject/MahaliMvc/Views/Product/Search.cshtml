@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Search Products";
+}
+
+<h2>Search Products</h2>
+
+@using (Html.BeginForm("Search", "Product", FormMethod.Post))
+{
+    <div class="input-group">
+        <input type="text" class="form-control" name="searchQuery" placeholder="Search for products">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="submit">Search</button>
+        </div>
+    </div>
+}

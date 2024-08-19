@@ -1,0 +1,62 @@
+﻿@{
+    ViewData["Title"] = "Contact Us";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="~/css/style.css" rel="stylesheet"> <!-- Add your custom CSS file -->
+    <style>
+        .contact-page {
+            padding: 30px 0;
+        }
+
+        .map-container {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container contact-page">
+        <div class="row">
+            <div class="col-lg-6">
+                <h2>Contact Us</h2>
+                <p>If you have any questions, feel free to reach out to us using the form below or visit us at our location.</p>
+                <form action="https://api.web3forms.com/submit" method="POST" id="contact-form">
+                    <div class="form-group">
+                        <input type="hidden" name="access_key" value="9f6aaefc-e2d8-468e-98ac-e512777c193b">
+
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Your Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Your Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea class="form-control" id="message" name="message" rows="4" placeholder="Your Message"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+
+            </div>
+            <div class="col-lg-6">
+                <h2>Our Location</h2>
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3365.164069700156!2d35.988650773952635!3d32.4950436983458!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151b89381a3b428f%3A0xfd149214da321b7d!2sJordan%20University%20of%20Science%20%26%20Technology%20(JUST)!5e0!3m2!1sen!2sjo!4v1717331317174!5m2!1sen!2sjo" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

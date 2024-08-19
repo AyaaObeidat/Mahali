@@ -1,0 +1,43 @@
+﻿@model List<MahaliDtos.ReviewRequestListItems>
+
+@{
+    ViewBag.Title = "Review Requests";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container mt-5">
+      
+    <h2>Review Requests</h2>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+
+                    <th>Review Content</th>
+                    <th>Created At</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+               @*  @foreach (var reviewRequest in Model)
+                {
+                    <tr>
+                        
+                        <td>@reviewRequest.ReviewContentBody</td>
+                        <td>@reviewRequest.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                        <td>@reviewRequest.Status</td>
+                        <td>
+                            <form asp-action="ApproveReview" asp-route-customerId="@reviewRequest.CustomerId" asp-route-productId="@reviewRequest.ProductId" method="post">
+                                <button type="submit" class="btn btn-success">Approve</button>
+                            </form>
+                            <form asp-action="RejectReview" asp-route-customerId="@reviewRequest.CustomerId" asp-route-productId="@reviewRequest.ProductId" method="post">
+                                <button type="submit" class="btn btn-danger">Reject</button>
+                            </form>
+                        </td>
+                    </tr>
+                } *@
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@{
+    ViewData["Title"] = "Get All Shops";
+}
+
+@model List<MahaliDtos.ShopListItems>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="~/css/style.css" rel="stylesheet"> <!-- Add your custom CSS file -->
+    <link href="~/css/style.min.css" rel="stylesheet" />
+    <link href="~/css/stylesheet.css" rel="stylesheet" />
+    <link href="~/css/style.min.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" />
+    <link href="~/css/homepgae.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="container">
+        <h3 class="text-center">All Shops</h3>
+        <div class="row">
+            @foreach (var shop in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">@shop.Name</h5>
+                            <p class="card-text"><strong>Phone Number:</strong> @shop.PhoneNumber</p>
+                            <a href="@Url.Action("ViewShopProducts", new { shopId = shop.Id })" class="btn btn-primary">View Products</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

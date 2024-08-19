@@ -1,0 +1,94 @@
+﻿@model List<MahaliDtos.ProductListItems>
+@{
+    ViewData["Title"] = "Shop";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid bg-white mb-5">
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height:100px;">
+        <h1 class="font-weight-semi-bold text-uppercase mb-3 text-black">Abedeen Home</h1>
+        <div class="d-inline-flex">
+            <p class="m-0"><a href="#" class="text-black" style="font-size: 24px; color: #902525;">Home</a></p>
+            <p class="m-0 px-2 text-black" style="font-size: 24px;">-</p>
+            <p class="m-0 text-black" style="font-size: 24px;">Shop</p>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid pt-5">
+    <div class="row">
+        <!-- Shop Sidebar Start -->
+        <div class="col-lg-3 col-md-12">
+            <!-- Filter by Color -->
+            <div class="card mb-4">
+                <h5 class="card-header">Filter by Color</h5>
+                <div class="card-body">
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" class="custom-control-input" checked id="color-all">
+                        <label class="custom-control-label" for="color-all">All Color</label>
+                        <span class="badge border font-weight-normal">1000</span>
+                    </div>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" class="custom-control-input" id="color-1">
+                        <label class="custom-control-label" for="color-1">Black</label>
+                        <span class="badge border font-weight-normal">150</span>
+                    </div>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" class="custom-control-input" id="color-2">
+                        <label class="custom-control-label" for="color-2">White</label>
+                        <span class="badge border font-weight-normal">295</span>
+                    </div>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" class="custom-control-input" id="color-3">
+                        <label class="custom-control-label" for="color-3">Red</label>
+                        <span class="badge border font-weight-normal">246</span>
+                    </div>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" class="custom-control-input" id="color-4">
+                        <label class="custom-control-label" for="color-4">Blue</label>
+                        <span class="badge border font-weight-normal">145</span>
+                    </div>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" class="custom-control-input" id="color-5">
+                        <label class="custom-control-label" for="color-5">Green</label>
+                        <span class="badge border font-weight-normal">168</span>
+                    </div>
+                    <!-- Other color filter options -->
+                </div>
+            </div>
+        </div>
+        <!-- Shop Sidebar End -->
+        <!-- Shop Product Start -->
+        <div class="col-lg-9 col-md-12">
+            <div class="row">
+                @foreach (var product in Model)
+                {
+                    <div class="col-lg-4 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <img class="card-img-top" src="@Url.Content(product.ImageUri)" alt="@product.Name">
+                                <h4 class="card-title">@product.Name</h4>
+                                <h5>@product.Price.ToString("0.00") JOD</h5>
+                                <p class="card-text">@product.Description</p>
+                            </div>
+                            <div class="card-footer">
+                                <a class="btn btn-primary btn-sm" href="@Url.Action("View", "Product", new { id = product.Id })">View</a>
+                                <button class="btn btn-outline-danger btn-sm" onclick="deleteProduct('@product.Id')">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <h2>Our Location</h2>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3383.698426775798!2d35.857580725282084!3d31.996189723481404!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151ca11e7554e267%3A0xd28d41a59c18767b!2zQWJkZWVuIEhvbWUgY2VudGVyIEtoYWxkYSDYudin2KjYr9mK2YYg2YfZiNmFINiz2YbYqtixINiu2YTYr9in!5e0!3m2!1sar!2sjo!4v1717439625162!5m2!1sar!2sjo" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Shop Product End -->
+    </div>
+</div>

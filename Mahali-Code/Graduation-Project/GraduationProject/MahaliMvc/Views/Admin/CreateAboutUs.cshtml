@@ -1,0 +1,23 @@
+﻿@model MahaliDtos.AboutUsListItem
+@{
+    ViewData["Title"] = "Create About Us";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Create About Us</h2>
+
+<form asp-action="CreateAboutUs" method="post">
+    <div class="form-group">
+        <label asp-for="ContentBody" class="control-label"></label>
+        <textarea asp-for="ContentBody" class="form-control"></textarea>
+        <span asp-validation-for="ContentBody" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+
+
+
+<div>
+    <a asp-action="Dashboard">Go Back</a>
+</div>

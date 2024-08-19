@@ -1,0 +1,31 @@
+﻿@model List<MahaliDtos.OrderListItems>
+
+@{
+    ViewBag.Title = "Order List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container mt-5">
+   
+    <h2>Order List</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Total Amount</th>
+                    <th>Created At</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var order in Model)
+                {
+                    <tr>
+                        <td>@order.Id</td>
+                        <td>@order.TotalAmount</td>
+                        <td>@order.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

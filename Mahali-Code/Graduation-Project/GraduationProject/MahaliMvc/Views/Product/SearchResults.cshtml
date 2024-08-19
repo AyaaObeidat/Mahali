@@ -1,0 +1,36 @@
+﻿@model List<MahaliDtos.ProductListItems>
+
+@{
+    ViewData["Title"] = "Search Results";
+}
+
+<h2>Search Results</h2>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <!-- Add other columns as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td>@product.Name</td>
+                    <td>@product.Description</td>
+                    <td>@product.Price</td>
+                    <!-- Add other columns as needed -->
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No products found.</p>
+}

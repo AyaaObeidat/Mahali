@@ -1,0 +1,92 @@
+﻿@model MahaliMvc.Models.Product.ProductDto
+
+@{
+    ViewBag.Title = "Product Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid bg-secondary mb-5">
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 100px; background-color: white;">
+        <h1 class="font-weight-semi-bold text-uppercase mb-3" style="background-color: white;">@Model.product.Name</h1>
+        <div class="d-inline-flex">
+            <p class="m-0"><a href="@Url.Action("Index", "Home")" style="color: #902525; background-color: white;">Home</a></p>
+            <p class="m-0 px-2" style="background-color: white;">-</p>
+            <p class="m-0" style="background-color: white;">@Model.product.Name</p>
+        </div>
+    </div>
+</div>
+
+<!-- Shop Detail Start -->
+<div class="container-fluid py-5">
+    <div class="row px-xl-5">
+        <div class="col-lg-5 pb-5">
+            <!-- Product image -->
+            <img class="w-100 h-100" src="@Model.product.ImageUri" alt="Product Image">
+        </div>
+
+        <div class="col-lg-7 pb-5">
+            <!-- Product details -->
+            <h3 class="font-weight-semi-bold">@Model.product.Name</h3>
+            <p>@Model.product.Description</p>
+            <p>Quantity: @Model.product.Quantity</p>
+            <p>Price: @Model.product.Price</p>
+            <!-- Display other product details as needed -->
+            <!-- Display colors list -->
+            <h4>Available Colors:</h4>
+            <ul>
+                @foreach (var color in Model.product.ColorsList)
+                {
+                    <li>@color</li>
+                }
+            </ul>
+
+            <!-- Display sizes list -->
+            <h4>Available Sizes:</h4>
+            <ul>
+                @foreach (var size in Model.product.SizesList)
+                {
+                    <li>@size</li>
+                }
+            </ul>
+
+            <!-- Display reviews -->
+            <h4>Reviews:</h4>
+            <ul>
+                @foreach (var review in Model.product.Reviews)
+                {
+                    <li>@review.ReviewContentBody</li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+@if (Model.latestProducts.Count > 0 && Model.latestProducts != null)
+{
+    <main class="container mt-5">
+        <div class="text-center mb-4">
+            <h3 class="font-weight-semi-bold">Latest Products</h3>
+        </div>
+        <div class="row">
+
+            @foreach (var product in Model.latestProducts.Take(3))
+            {
+                <div class="col-lg-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <img class="card-img-top" src="@Url.Content(product.Product.ImageUri)" alt="@product.Product.Name">
+                            <h4 class="card-title">@product.Product.Name</h4>
+                            <h5>@product.Product.Price.ToString("0.00") JOD</h5>
+                            <p class="card-text">@product.Product.Description</p>
+                        </div>
+                        <div class="card-footer">
+                            <a class="btn-space btn btn-primary btn-sm btn-custom" href="@Url.Action("Product","Product", new { id = product.Product.Id })">View</a>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </main>
+}

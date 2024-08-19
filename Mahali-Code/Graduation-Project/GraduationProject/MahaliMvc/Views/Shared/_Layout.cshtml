@@ -1,0 +1,187 @@
+﻿
+@using MahaliMvc.Models.Enum
+
+@{
+    ViewData["Title"] = "Online Shopping - Mahali";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <!-- Favicon Links -->
+    <link rel="icon" href="~/imgs/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="~/imgs/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="~/imgs/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/imgs/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/imgs/favicon-16x16.png">
+    <link rel="manifest" href="~/imgs/site.webmanifest">
+
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="~/css/stylesheet.css" rel="stylesheet" />
+    <link href="~/css/style.min.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" />
+    <link href="~/css/layout.css" rel="stylesheet" />
+    
+    
+</head>
+@{
+    var email = Context.Session.GetString("UserEmail");
+    var userName = Context.Session.GetString("UserName");
+    var userType = Context.Session.GetString("UserType");
+}
+<body>
+    <header>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-3 d-none d-lg-block">
+                    <a href="" class="text-decoration-none logo-text">
+                        <img src="~/img/logo1.png" alt="Logo">
+                        <h1 class="m-0 display-5 font-weight-semi-bold">Mahali</h1>
+                    </a>
+                </div>
+                <div class="col-lg-6 col-6 text-left">
+                   @using (Html.BeginForm("Search", "Product", FormMethod.Post))
+                    {
+                        <form action="">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search for products">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="submit">Search</button>
+                                </div>
+                            </div>
+                        </form>
+                    }
+                </div>
+                <div class="col-lg-3 col-6 text-right">
+                    <a asp-area="" asp-controller="Wishlist" asp-action="Wishlist" class="btn border">
+                        <i class="fas fa-heart text-primary"></i>
+                      
+                    </a>
+                    <a asp-area="" asp-controller="Cart" asp-action="Cart" class="btn border">
+                        <i class="fas fa-shopping-cart text-primary"></i>
+                        
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Topbar End -->
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="padding: 5px 0;">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Shop" asp-action="GetAllShops">Shops</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Customer" asp-action="About">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Customer" asp-action="Contact">Contact</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                     <li class="nav-item dropdown">
+     @if (string.IsNullOrEmpty(userType) && (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(userName)))
+     { <li class="nav-item">
+     <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="Login">
+         <button type="button" class="btn btn-secondary">Login</button>
+     </a>
+ </li>
+ <li class="nav-item">
+     <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="Register">
+         <button type="button" class="btn btn-secondary">Register</button>
+     </a>
+ </li>
+     }
+     else
+     {
+         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             @(string.IsNullOrEmpty(userName) ? email : userName)
+                 
+         </a>
+         <div class="dropdown-menu" aria-labelledby="userDropdown">
+             @if(userType == UserType.Admin.ToString() ){
+                            <a class="dropdown-item" asp-area="" asp-controller="Admin" asp-action="EditAdminAccount">Profile</a>
+                                }
+                                else  @if (userType == UserType.Customer.ToString())
+                                {
+                                <a class="dropdown-item" asp-area="" asp-controller="Customer" asp-action="EditCustomerAccount">Profile</a>
+                                }
+                                else  @if (userType == UserType.Shop.ToString())
+                                {
+                                <a class="dropdown-item" asp-area="" asp-controller="Shop" asp-action="EditShopDetails">Profile</a>
+                                }
+             <a class="dropdown-item" asp-area="" asp-controller="Admin" asp-action="Logout">Logout</a>
+         </div>
+     }
+ </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+<main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 footer-item">
+                    <h3>About</h3>
+                    <p>We are dedicated to providing the best shopping experience to our customers.</p>
+                </div>
+                <div class="col-lg-3 col-md-6 footer-item">
+                    <h3>Quick Links</h3>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Category</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 footer-item">
+                    <h3>Support</h3>
+                    <ul class="list-unstyled">
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Shipping</a></li>
+                        <li><a href="#">Returns</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 footer-item">
+                    <h3>Follow Us</h3>
+                    <ul class="list-inline">
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="fab fa-instagram"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    @RenderSection("Scripts", required: false)
+
+    <!-- Footer-bottom Section HTML Code STARTS -->
+    <div class="width-100 footer2-bacbor">
+        <p class="footer2-content">Copyright © 2024, www.Mahali.com All Rights Reserved</p>
+    </div>
+    <!-- Footer-bottom Section HTML Code Ends -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+</body>
+</html>

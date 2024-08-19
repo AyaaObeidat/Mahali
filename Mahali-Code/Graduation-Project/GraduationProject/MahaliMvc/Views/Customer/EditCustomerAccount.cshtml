@@ -1,0 +1,107 @@
+﻿@model MahaliDtos.CustomerUpdateParameters
+
+@{
+    ViewBag.Title = "Edit Customer Account";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container edit-customer-form mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-primary text-white text-center">
+                    <h2>Edit Customer Account</h2>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="EditCustomerAccount" method="post" class="needs-validation" novalidate>
+                        <div class="mb-3">
+                            <label for="FirstName" class="form-label">First Name</label>
+                            <input asp-for="NewFirstName" type="text" class="form-control" id="FirstName" placeholder="Enter your first name" required>
+                            <span asp-validation-for="NewFirstName" class="text-danger"></span>
+                            <div class="invalid-feedback">
+                                Please provide a valid first name.
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="LastName" class="form-label">Last Name</label>
+                            <input asp-for="NewLastName" type="text" class="form-control" id="LastName" placeholder="Enter your last name" required>
+                            <span asp-validation-for="NewLastName" class="text-danger"></span>
+                            <div class="invalid-feedback">
+                                Please provide a valid last name.
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="CurrentPassword" class="form-label">Current Password</label>
+                            <div class="input-group">
+                                <input asp-for="CurrentPassword" type="password" class="form-control" id="CurrentPassword" placeholder="Enter your current password" required>
+                                <button type="button" class="btn btn-outline-secondary" onclick="togglePasswordVisibility('CurrentPassword', 'currentPasswordToggle')">
+                                    <i id="currentPasswordToggle" class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <span asp-validation-for="CurrentPassword" class="text-danger"></span>
+                            <div class="invalid-feedback">
+                                Current password is required.
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="NewPassword" class="form-label">New Password</label>
+                            <div class="input-group">
+                                <input asp-for="NewPassword" type="password" class="form-control" id="NewPassword" placeholder="Enter your new password" required>
+                                <button type="button" class="btn btn-outline-secondary" onclick="togglePasswordVisibility('NewPassword', 'newPasswordToggle')">
+                                    <i id="newPasswordToggle" class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <span asp-validation-for="NewPassword" class="text-danger"></span>
+                            <div class="invalid-feedback">
+                                New password is required.
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+    <script>
+        function togglePasswordVisibility(passwordFieldId, toggleIconId) {
+            var passwordField = document.getElementById(passwordFieldId);
+            var toggleIcon = document.getElementById(toggleIconId);
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                toggleIcon.classList.remove("fa-eye");
+                toggleIcon.classList.add("fa-eye-slash");
+            } else {
+                passwordField.type = "password";
+                toggleIcon.classList.remove("fa-eye-slash");
+                toggleIcon.classList.add("fa-eye");
+            }
+        }
+
+        $(document).ready(function () {
+            // Hide validation messages on load
+            $("span.text-danger").hide();
+
+            // Ensure client-side validation is working
+            $.validator.unobtrusive.parse('form');
+
+            // Show validation messages when they are added
+            $('form').on('submit', function () {
+                if (!$(this).valid()) {
+                    $("span.text-danger").each(function () {
+                        if ($(this).text().trim() !== "") {
+                            $(this).show();
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}

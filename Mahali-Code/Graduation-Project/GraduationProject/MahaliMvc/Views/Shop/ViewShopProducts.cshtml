@@ -1,0 +1,25 @@
+﻿@model List<MahaliDtos.ProductListItems>
+
+<div class="container">
+    <h3 class="text-center">Products in Shop</h3>
+    <div class="row">
+        @foreach (var product in Model)
+        {
+            <div class="col-lg-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <img class="card-img-top" src="~/img/@product.ImageUri" alt="@product.Name">
+                        <h4 class="card-title">@product.Name</h4>
+                        <h5>@product.Price.ToString("F2") JOD</h5>
+                        <p class="card-text">@product.Description</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="btn-space btn btn-primary btn-sm btn-custom">View</a>
+                        <button class="btn btn-outline-primary btn-sm btn-custom">Add to Cart</button>
+                        <button class="btn btn-outline-primary btn-sm btn-custom wishlist-btn"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

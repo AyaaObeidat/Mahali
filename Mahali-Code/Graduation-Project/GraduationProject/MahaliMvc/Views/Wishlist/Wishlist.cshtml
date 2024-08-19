@@ -1,0 +1,53 @@
+﻿@model List<MahaliDtos.WishListListItems>
+
+@{
+    ViewData["Title"] = "Wishlist";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="~/css/style.css" rel="stylesheet">
+    <!-- Include any other CSS files if needed -->
+</head>
+<body>
+    <div class="container">
+        <div class="wishlist-header">
+            <h1>My Wishlist</h1>
+        </div>
+        <div class="row">
+            @foreach (var wishlist in Model)
+            {
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Wishlist for Customer: @wishlist.CustomerId</h5>
+                            @if (wishlist.Products.Any())
+                            {
+                                @* <ul class="list-group">
+                                    @foreach (var product in wishlist.Products)
+                                    {
+                                        <li class="list-group-item">@product.Name - Price: @product.Price</li>
+                                    }
+                                </ul> *@
+                            }
+                            else
+                            {
+                                <p>No products in wishlist.</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Include any JavaScript files if needed -->
+</body>
+</html>

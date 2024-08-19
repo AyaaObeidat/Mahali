@@ -1,0 +1,68 @@
+﻿@model List<MahaliDtos.ReportListItems>
+
+
+@{
+    ViewData["Title"] = "Reports";
+}
+
+<h2>Reports</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Shop ID</th>
+            <th>Report Text</th>
+            <th>Created At</th>
+            <th>Last Modified Time</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var report in Model)
+        {
+            <tr>
+                <td>@report.Shop.Name</td>
+                <td>@report.ReportText</td>
+                <td>@report.CreatedAt</td>
+                <td>@report.LastModifiedTime</td>
+                <td class="action-column">
+                    <div class="action-container">
+                        <button class="action-button dropdown-toggle">
+                            ...
+                        </button>
+                        <div class="action-menu">
+                            <button class="dropdown-item" asp-action="WriteReport" asp-route-id="Model.ShopId">Edit shop</button>
+                            <button class="dropdown-item" asp-action="EditReportText" asp-route-id="Model.ShopId">Add Report</button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+       
+        }
+    </tbody>
+</table>
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const actionButtons = document.querySelectorAll('.action-button');
+
+        actionButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const actionMenu = this.nextElementSibling;
+                actionMenu.style.display = actionMenu.style.display === 'block' ? 'none' : 'block';
+            });
+        });
+
+        // Close action menu if clicked outside
+        document.addEventListener('click', function (event) {
+            if (!event.target.matches('.action-button')) {
+                const actionMenus = document.querySelectorAll('.action-menu');
+                actionMenus.forEach(menu => {
+                    menu.style.display = 'none';
+                });
+            }
+        });
+    });
+
+</script>

@@ -1,0 +1,17 @@
+﻿@model MahaliDtos.AboutUsUpdateParameters
+
+@{
+    ViewBag.Title = "Update About Us";
+}
+
+<h2>Update About Us</h2>
+
+<form asp-action="UpdateAboutUs" method="post">
+    <div class="form-group">
+        <label asp-for="ContentBody" class="control-label"></label>
+        <textarea asp-for="ContentBody" class="form-control"></textarea>
+        <span asp-validation-for="ContentBody" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>
+

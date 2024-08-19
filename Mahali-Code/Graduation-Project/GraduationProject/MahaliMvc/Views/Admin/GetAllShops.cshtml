@@ -1,0 +1,161 @@
+﻿@{
+    ViewData["Title"] = "All Shops";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model List<MahaliDtos.ShopRequestListItems>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="~/css/style.css" rel="stylesheet">
+    <link href="~/css/style.min.css" rel="stylesheet" />
+    <link href="~/css/stylesheet.css" rel="stylesheet" />
+    <script src="~/js/jquery.min.js"></script> <!-- Move jQuery script tag to the head -->
+</head>
+<body class="container">
+    <h3 style="text-align:center">All Shops</h3>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <td>UserName</td>
+                        <td>Phone Number</td>
+                        <td>Description</td>
+                        <td>Status</td>
+                        <td>Actions</td>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Shop.Name</td>
+                            <td>@item.Shop.PhoneNumber</td>
+                            <td>@item.Shop.Description</td>
+                            <td>@item.RequestStatus</td>
+                            <td class="action-column">
+                                <div class="action-container">
+@*                                     <button class="action-button dropdown-toggle">Actions</button>
+ *@                                    <button class="action-button btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Actions</button>
+
+                                    <div class="action-menu">
+                                        @if (item.RequestStatus.ToString() == "Approved")
+                                        {
+
+                                            <a class="dropdown-item" href="@Url.Action("AddReport", "Admin", new { input = item.Shop.Id })">Add Report</a>
+                                            }
+                                            @if (item.RequestStatus.ToString() == "Pending")
+                                            {
+                                                    <form id="approveFormApprove" action="@Url.Action("UpdateShopRequestStatus", "Admin")" method="post">
+                                                        <input type="hidden" name="shopId" id="shopIdApprove" />
+                                                        <input type="hidden" name="status" id="statusApprove" />
+                                                    </form>
+                                                    <a class="dropdown-item" onclick="submitForm('approve', '@item.Shop.Id', 'Approved')">Approve</a>
+
+                                                    <form id="approveFormReject" action="@Url.Action("UpdateShopRequestStatus", "Admin")" method="post">
+                                                        <input type="hidden" name="shopId" id="shopIdReject" />
+                                                        <input type="hidden" name="status" id="statusReject" />
+                                                    </form>
+                                                    <a class="dropdown-item" onclick="submitForm('reject', '@item.Shop.Id', 'Rejected')">Reject</a>
+                                            }
+                                    </div>
+                                </div>
+                            </td>
+                            @* <td>
+                                <div class="dropdown">
+                                    <button type="button" id="dropdownMenuButton" class="btn action light sharp" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <svg width="20px" height="20px" viewBox="0 0 24 24" version="1.1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect x="0" y="0" width="24" height="24"></rect>
+                                                <circle fill="#000000" cx="5" cy="12" r="2"></circle>
+                                                <circle fill="#000000" cx="12" cy="12" r="2"></circle>
+                                                <circle fill="#000000" cx="19" cy="12" r="2"></circle>
+                                            </g>
+                                        </svg>
+                                    </button>
+                                    <div class="dropdown">
+                                        <li><a class="dropdown-item" href="@Url.Action("AddReport", "Admin", new { input = item.Shop.Id })">Add Report</a></li>
+                                        @if (item.RequestStatus.ToString() == "Pending")
+                                        {
+                                        <li>
+                                            <form id="approveFormApprove" action="@Url.Action("UpdateShopRequestStatus", "Admin")" method="post">
+                                                <input type="hidden" name="shopId" id="shopIdApprove" />
+                                                <input type="hidden" name="status" id="statusApprove" />
+                                            </form>
+                                            <a class="dropdown-item" onclick="submitForm('approve', '@item.Shop.Id', 'Approved')">Approve</a>
+                                        </li>
+ 
+                                            <li>
+                                                <form id="approveFormReject" action="@Url.Action("UpdateShopRequestStatus", "Admin")" method="post">
+                                                    <input type="hidden" name="shopId" id="shopIdReject" />
+                                                    <input type="hidden" name="status" id="statusReject" />
+                                                </form>
+                                                <a class="dropdown-item" onclick="submitForm('reject', '@item.Shop.Id', 'Rejected')">Reject</a>
+                                            </li>
+                                        }
+                                    </div>
+
+                                </div>
+                            </td> *@
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>
+
+
+<div>
+    <a asp-action="Dashboard">Go Back</a>
+</div>
+
+<script src="~/js/jquery.min.js"></script>
+<script>
+
+    function submitForm(action, shopId, status) {
+        // Set form values based on the action
+        var shopIdField = document.getElementById(action === 'approve' ? "shopIdApprove" : "shopIdReject");
+        var statusField = document.getElementById(action === 'approve' ? "statusApprove" : "statusReject");
+
+        // Set form values
+        shopIdField.value = shopId;
+        statusField.value = status;
+
+        // Submit the form
+        document.getElementById("approveForm" + action.charAt(0).toUpperCase() + action.slice(1)).submit();
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const actionButtons = document.querySelectorAll('.action-button');
+
+        actionButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const actionMenu = this.nextElementSibling;
+                actionMenu.style.display = actionMenu.style.display === 'block' ? 'none' : 'block';
+            });
+        });
+
+        // Close action menu if clicked outside
+        document.addEventListener('click', function (event) {
+            if (!event.target.matches('.action-button')) {
+                const actionMenus = document.querySelectorAll('.action-menu');
+                actionMenus.forEach(menu => {
+                    menu.style.display = 'none';
+                });
+            }
+        });
+
+      
+    });
+        </script>

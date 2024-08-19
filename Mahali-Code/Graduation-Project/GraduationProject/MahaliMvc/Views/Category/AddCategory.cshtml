@@ -1,0 +1,51 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Add New Category";
+
+}
+
+@model MahaliDtos.CategoryCreateParameters;
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="~/css/style.css" rel="stylesheet"> <!-- Add your custom CSS file -->
+    <link href="~/css/style.min.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" />
+    <link href="~/css/stylesheet.css" rel="stylesheet" />
+    <link href="~/css/style.min.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" />
+  </head>
+  <body class="container">
+    <form asp-action="AddCategory">
+        <h3 style="text-align:center">Add New Category</h3><hr />
+             <div class="row" style="padding-top:25px">
+                <div class="col-md-3">
+                     CategoryName<span class="text-danger">*</span>
+                         <input type="text" class="form-control" asp-for="Name"/>
+                         <span asp-validation-for="Name" class="text-danger"></span>
+                 </div>
+                 
+                 </div>
+
+        <div class="row" style="padding-top:25px">
+            <div class="col-md-4">
+                <input type="submit" class="form-control,btn btn-danger" />
+            </div>
+        </div>
+        <div class="row" style="padding-top:25px">
+            <div class="col-md-4">
+                <a asp-controller="Category" asp-action="GetAllCategory" class="btn btn-primary">Back to All Categories</a>
+            </div>
+        </div>
+    </form>
+
+
+</body>
+</html>

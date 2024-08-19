@@ -1,0 +1,78 @@
+﻿@model IEnumerable<MahaliDtos.ReportListItems>
+
+@{
+    ViewData["Title"] = "All Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>@ViewData["Title"]</title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+        <link href="~/css/style.css" rel="stylesheet">
+        <link href="~/css/style.min.css" rel="stylesheet" />
+        <link href="~/css/stylesheet.css" rel="stylesheet" />
+        <script src="~/js/jquery.min.js"></script> <!-- Move jQuery script tag to the head -->
+    </head>
+<body>
+
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+        <tr>
+            <th>
+                            @Html.DisplayNameFor(model => model.Shop.Name)
+                        </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReportText)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastModifiedTime)
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+               @Html.DisplayFor(modelItem => item.Shop.Name)
+             </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReportText)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastModifiedTime)
+            </td>
+  
+  @*           <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td> *@
+        </tr>
+}
+    </tbody>
+</table>
+        </div>
+    </div>
+</body>
+</html>
+
+
+<div>
+    <a asp-action="Dashboard">Go Back</a>
+</div>

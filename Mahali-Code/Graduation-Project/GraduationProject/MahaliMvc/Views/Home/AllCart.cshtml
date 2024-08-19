@@ -1,0 +1,47 @@
+﻿@model List<MahaliDtos.CartProductsListItems>
+
+@{
+    ViewBag.Title = "Add To Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@if (Model.Count > 0 && Model != null)
+{
+    <main class="container mt-5">
+
+        <div class="row">
+
+            @foreach (var product in Model)
+            {
+                <div class="col-lg-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <img class="card-img-top" src="@Url.Content(product.Product.ImageUri)" alt="@product.Product.Name">
+                            <h4 class="card-title">@product.Product.Name</h4>
+                            <h5>@product.Product.Price.ToString("0.00") JOD</h5>
+                            <p class="card-text">@product.Product.Description</p>
+                        </div>
+                        <div class="card-footer">
+                            <a class="btn-space btn btn-primary btn-sm btn-custom" href="@Url.Action("Product", "Product", new { id = product.Product.Id })">View</a>
+                            <a class="btn-space btn btn-danger btn-sm btn-custom" href="@Url.Action("DeleteCart", "Home", new { id = product.Product.Id })">Delete</a>
+                        </div>
+
+                    </div>
+                </div>
+            }
+
+        </div>
+    </main>
+}
+else
+{
+        <main class="container mt-5">
+
+    <div class="text-center mb-4">
+        <h3 class="font-weight-semi-bold">No Any Products in Cart</h3>
+    </div>
+    </main>
+
+}

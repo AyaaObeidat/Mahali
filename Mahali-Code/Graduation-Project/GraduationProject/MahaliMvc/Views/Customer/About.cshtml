@@ -1,0 +1,61 @@
+﻿@model MahaliDtos.AboutUsCreateParameters
+
+@{
+    ViewData["Title"] = "About us";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"> <!-- Google Fonts -->
+    <link href="~/css/style.css" rel="stylesheet"> <!-- Keep only one instance of each stylesheet -->
+
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .about-us-container {
+            margin-top: 50px;
+        }
+
+        .about-us-content {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-us-header {
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .about-us-content p {
+            font-size: 1.1em;
+            line-height: 1.6em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container about-us-container">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="about-us-content">
+                    <h1 class="about-us-header text-center">@ViewData["Title"]</h1>
+                    <div>@Html.Raw(Model.ContentBody)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
